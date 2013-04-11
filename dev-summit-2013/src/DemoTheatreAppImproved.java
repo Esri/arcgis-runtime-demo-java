@@ -56,10 +56,13 @@ import com.esri.core.geometry.Point;
 import com.esri.core.geometry.SpatialReference;
 import com.esri.core.map.FeatureSet;
 import com.esri.core.map.Graphic;
+import com.esri.core.renderer.UniqueValueInfo;
+import com.esri.core.renderer.UniqueValueRenderer;
 import com.esri.core.symbol.SimpleFillSymbol;
 import com.esri.core.symbol.SimpleLineSymbol;
 import com.esri.core.symbol.SimpleMarkerSymbol;
 import com.esri.core.symbol.SimpleMarkerSymbol.Style;
+import com.esri.core.symbol.Symbol;
 import com.esri.core.tasks.ags.geoprocessing.GPFeatureRecordSetLayer;
 import com.esri.core.tasks.ags.geoprocessing.GPParameter;
 import com.esri.core.tasks.ags.geoprocessing.GPString;
@@ -67,8 +70,8 @@ import com.esri.core.tasks.ags.geoprocessing.Geoprocessor;
 import com.esri.core.tasks.ags.query.OrderByFields;
 import com.esri.core.tasks.ags.query.Query;
 import com.esri.core.tasks.ags.query.QueryTask;
-import com.esri.map.ArcGISDynamicMapServiceLayer;
 import com.esri.map.ArcGISFeatureLayer;
+import com.esri.map.ArcGISTiledMapServiceLayer;
 import com.esri.map.GraphicsLayer;
 import com.esri.map.JMap;
 import com.esri.map.MapEvent;
@@ -322,21 +325,21 @@ public class DemoTheatreAppImproved {
     // -----------------------------------------------------------------------------------------
     // graphics layer - to add result from the geoprocessing execution
     // -----------------------------------------------------------------------------------------
-    graphicsLayer = new GraphicsLayer();
-    jMap.getLayers().add(graphicsLayer);
+    /*graphicsLayer = new GraphicsLayer();
+    jMap.getLayers().add(graphicsLayer);*/
 
     featureLayer = new ArcGISFeatureLayer(
        "http://sampleserver6.arcgisonline.com/arcgis/rest/services/USA/MapServer/0");
     // "http://sampleserver6.arcgisonline.com/arcgis/rest/services/WorldTimeZones/MapServer/0");
 
     // Tip: consider using renderer
-    /*final Symbol SYM_CAPITAL = new SimpleMarkerSymbol(Color.RED, 14, Style.TRIANGLE);
+    final Symbol SYM_CAPITAL = new SimpleMarkerSymbol(Color.RED, 14, Style.TRIANGLE);
     final SimpleMarkerSymbol SYM_NON_CAPITAL = new SimpleMarkerSymbol(Color.YELLOW, 9, Style.CIRCLE); 
     UniqueValueRenderer uvRenderer = new UniqueValueRenderer(); 
     uvRenderer.setAttributeName1("capital"); 
     uvRenderer.addValue(new UniqueValueInfo(new Object[] {"Y"}, SYM_CAPITAL)); 
     uvRenderer.addValue(new UniqueValueInfo(new Object[] {"N"}, SYM_NON_CAPITAL)); 
-    featureLayer.setRenderer(uvRenderer);*/
+    featureLayer.setRenderer(uvRenderer);
     
     // Tip: consider on-demand mode
     // featureLayer.setOperationMode(QueryMode.ON_DEMAND);
@@ -344,8 +347,8 @@ public class DemoTheatreAppImproved {
     jMap.getLayers().add(featureLayer);
 
     // Tip: order of layers -> order of graphics
-    // graphicsLayer = new GraphicsLayer();
-    // jMap.getLayers().add(graphicsLayer);
+    graphicsLayer = new GraphicsLayer();
+    jMap.getLayers().add(graphicsLayer);
 
     // -----------------------------------------------------------------------------------------
     // geoprocessing service executor
@@ -395,14 +398,13 @@ public class DemoTheatreAppImproved {
 
 
   private void addBaseLayer(JMap jMap) {
-    final ArcGISDynamicMapServiceLayer baseLayer = new ArcGISDynamicMapServiceLayer(
+    /*final ArcGISDynamicMapServiceLayer baseLayer = new ArcGISDynamicMapServiceLayer(
         "http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StateCityHighway_USA/MapServer");
-
+*/
     // Tip: Use tiled layer as a basemap    
-    /*final ArcGISTiledMapServiceLayer baseLayer = new ArcGISTiledMapServiceLayer(
+    final ArcGISTiledMapServiceLayer baseLayer = new ArcGISTiledMapServiceLayer(
       //"http://services.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer");
       "http://services.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer"); // SR 4326
-    */
     
     jMap.getLayers().add(baseLayer);     
   }
@@ -424,8 +426,8 @@ public class DemoTheatreAppImproved {
     query.setOutFields(new String[] {"*"});
 
     // Tip: use map's SR
-    query.setOutSpatialReference(SpatialReference.create(3857));
-    //query.setOutSpatialReference(map.getSpatialReference());
+    //query.setOutSpatialReference(SpatialReference.create(3857));
+    query.setOutSpatialReference(map.getSpatialReference());
 
     // Tip: don't fetch geometry if not required
     // query.setReturnGeometry(false);
