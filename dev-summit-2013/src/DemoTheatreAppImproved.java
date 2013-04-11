@@ -36,7 +36,6 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
@@ -55,6 +54,7 @@ import com.esri.core.geometry.Geometry;
 import com.esri.core.geometry.GeometryEngine;
 import com.esri.core.geometry.Point;
 import com.esri.core.geometry.SpatialReference;
+import com.esri.core.map.CallbackListener;
 import com.esri.core.map.FeatureSet;
 import com.esri.core.map.Graphic;
 import com.esri.core.renderer.UniqueValueInfo;
@@ -613,9 +613,9 @@ public class DemoTheatreAppImproved {
       GPFeatureRecordSetLayer gpInputStartpoint = new GPFeatureRecordSetLayer("Input_Location");
       gpInputStartpoint.addGraphic(projectedStartPointGraphic);
 
-      GPString gpInputDriveTimes = new GPString("Drive_Time");
+      //GPString gpInputDriveTimes = new GPString("Drive_Time");
       // Tip: use GP service info to get the parameter names
-      // GPString gpInputDriveTimes = new GPString("Drive_Times");
+      GPString gpInputDriveTimes = new GPString("Drive_Times");
       
       gpInputDriveTimes.setValue("1 2 3");
 
@@ -623,15 +623,15 @@ public class DemoTheatreAppImproved {
       gpInputParams.add(gpInputDriveTimes);
 
       // execute the geoprocessing request
-      try {
+      /*try {
         GPParameter[] result = geoprocessor.execute(gpInputParams);
         updateProgresBarUI(null,  tasksInProgress.decrementAndGet() > 0);
         processResult(result);
       } catch (Exception ex) {
         JOptionPane.showMessageDialog(map, ex.getMessage(), "", JOptionPane.ERROR_MESSAGE);
-      }
+      }*/
       
-      /*// Tip: Do not block UI thread. 
+      // Tip: Do not block UI thread. 
       geoprocessor.executeAsync( 
         gpInputParams, 
         new CallbackListener<GPParameter[]>() {
@@ -645,7 +645,7 @@ public class DemoTheatreAppImproved {
               processResult(result); 
               } 
             } 
-        ); */      
+        );       
     }
 
     /**
