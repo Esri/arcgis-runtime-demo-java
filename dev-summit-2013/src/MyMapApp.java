@@ -18,6 +18,10 @@ import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.SwingUtilities;
 
+import com.esri.client.toolkit.overlays.DrawingCompleteEvent;
+import com.esri.client.toolkit.overlays.DrawingCompleteListener;
+import com.esri.client.toolkit.overlays.DrawingOverlay;
+import com.esri.client.toolkit.overlays.DrawingOverlay.DrawingMode;
 import com.esri.core.geometry.Envelope;
 import com.esri.core.geometry.Point;
 import com.esri.core.gps.FileGPSWatcher;
@@ -30,11 +34,11 @@ import com.esri.core.tasks.ags.geocode.LocatorFindParameters;
 import com.esri.core.tasks.ags.geocode.LocatorGeocodeResult;
 import com.esri.map.ArcGISTiledMapServiceLayer;
 import com.esri.map.GPSLayer;
+import com.esri.map.GPSLayer.Mode;
 import com.esri.map.GraphicsLayer;
 import com.esri.map.JMap;
 import com.esri.map.MapEvent;
 import com.esri.map.MapEventListenerAdapter;
-import com.esri.map.GPSLayer.Mode;
 
 /**
  * This sample shows how to create a basic map application.
@@ -50,7 +54,10 @@ public class MyMapApp {
   private JTextField textField;
   private GraphicsLayer addressGraphics;
   private Symbol geocodeSymbol;
-
+  
+  private GraphicsLayer stopGraphics;
+  private Symbol symRoutingStops;
+  
   public MyMapApp() {
     window = new JFrame();
     window.setBounds(0, 0, 1000, 700);
@@ -113,7 +120,6 @@ public class MyMapApp {
     map.getLayers().add(addressGraphics);
     geocodeSymbol = createGeocodeSymbol();
     
-    // Geocoding
     textField = new JTextField("100 holyrood, Edinburgh");
     JButton findButton = new JButton("Find");
 
@@ -127,6 +133,44 @@ public class MyMapApp {
         onFind();
       }
     });
+    
+    // graphics layer to add stops
+    stopGraphics = new GraphicsLayer();
+    map.getLayers().add(stopGraphics);
+    symRoutingStops = createRoutingSymbol();
+    
+    // create drawing overlay, setup, and add to map
+    final DrawingOverlay drawingOverlay = new DrawingOverlay();
+    map.addMapOverlay(drawingOverlay);
+    drawingOverlay.setUp(
+        DrawingMode.POINT,
+        symRoutingStops,
+        null);
+    drawingOverlay.setActive(false);
+    drawingOverlay.addDrawingCompleteListener(new DrawingCompleteListener() {
+
+      @Override
+      public void drawingCompleted(DrawingCompleteEvent arg0) {
+        Graphic graphic = drawingOverlay.getAndClearGraphic();
+
+        Point pt = (Point) graphic.getGeometry();
+        System.out.println("x: " +pt.getX() +", y: "+ pt.getY());
+        
+        stopGraphics.addGraphic(graphic);
+      }
+    });
+
+    JButton addStops = new JButton("Add stops");
+    addStops.addActionListener(new ActionListener() {
+
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        drawingOverlay.setActive(true);
+      }
+    });
+    
+    toolbar.add(addStops);
+    
   }
   
   protected void onFind() {
@@ -176,6 +220,14 @@ public class MyMapApp {
         }
       }
     });
+  }
+  
+  private PictureMarkerSymbol createRoutingSymbol() {
+    PictureMarkerSymbol symPoint = new PictureMarkerSymbol(
+        "http://static.arcgis.com/images/Symbols/Basic/BlueStickpin.png");
+    symPoint.setSize(44, 44);
+    symPoint.setOffsetY(22.0f);
+    return symPoint;
   }
   
   private PictureMarkerSymbol createGeocodeSymbol() {
