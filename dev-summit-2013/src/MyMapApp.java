@@ -22,6 +22,8 @@ import javax.swing.SwingUtilities;
 import com.esri.client.toolkit.overlays.DrawingCompleteEvent;
 import com.esri.client.toolkit.overlays.DrawingCompleteListener;
 import com.esri.client.toolkit.overlays.DrawingOverlay;
+import com.esri.client.toolkit.overlays.NavigatorOverlay;
+import com.esri.client.toolkit.overlays.ScaleBarOverlay;
 import com.esri.client.toolkit.overlays.DrawingOverlay.DrawingMode;
 import com.esri.core.geometry.Envelope;
 import com.esri.core.geometry.Point;
@@ -203,6 +205,13 @@ public class MyMapApp {
     
     toolbar.add(solve);
     
+    // overlays
+    ScaleBarOverlay scaleBar = new ScaleBarOverlay();
+    map.addMapOverlay(scaleBar);
+
+    NavigatorOverlay navigator = new NavigatorOverlay();
+    navigator.setLocation(new java.awt.Point(10, 10));
+    map.addMapOverlay(navigator);
   }
   
   protected void solveRoute() {
