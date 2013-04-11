@@ -1,6 +1,7 @@
 
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,13 +26,20 @@ import com.esri.client.toolkit.overlays.DrawingOverlay.DrawingMode;
 import com.esri.core.geometry.Envelope;
 import com.esri.core.geometry.Point;
 import com.esri.core.gps.FileGPSWatcher;
+import com.esri.core.io.UserCredentials;
 import com.esri.core.map.CallbackListener;
 import com.esri.core.map.Graphic;
 import com.esri.core.symbol.PictureMarkerSymbol;
+import com.esri.core.symbol.SimpleLineSymbol;
 import com.esri.core.symbol.Symbol;
 import com.esri.core.tasks.ags.geocode.Locator;
 import com.esri.core.tasks.ags.geocode.LocatorFindParameters;
 import com.esri.core.tasks.ags.geocode.LocatorGeocodeResult;
+import com.esri.core.tasks.ags.na.NAFeaturesAsFeature;
+import com.esri.core.tasks.ags.na.Route;
+import com.esri.core.tasks.ags.na.RoutingResult;
+import com.esri.core.tasks.ags.na.RoutingTask;
+import com.esri.core.tasks.ags.na.RoutingTaskParameters;
 import com.esri.map.ArcGISTiledMapServiceLayer;
 import com.esri.map.GPSLayer;
 import com.esri.map.GPSLayer.Mode;
@@ -57,6 +65,10 @@ public class MyMapApp {
   
   private GraphicsLayer stopGraphics;
   private Symbol symRoutingStops;
+  
+  private GraphicsLayer routeGraphics;
+  private NAFeaturesAsFeature stops = new NAFeaturesAsFeature();
+  private UserCredentials credentials;
   
   public MyMapApp() {
     window = new JFrame();
@@ -157,6 +169,7 @@ public class MyMapApp {
         System.out.println("x: " +pt.getX() +", y: "+ pt.getY());
         
         stopGraphics.addGraphic(graphic);
+        stops.addFeature(graphic);
       }
     });
 
@@ -171,6 +184,56 @@ public class MyMapApp {
     
     toolbar.add(addStops);
     
+    // ROUTING
+    routeGraphics = new GraphicsLayer();
+    map.getLayers().add(routeGraphics);
+    
+    // add your user credentials for the World Routing Server (uses credits)
+    credentials = new UserCredentials();
+    credentials.setUserAccount("username", "password"); // these are made up and will not work
+    
+    JButton solve = new JButton("Solve route");
+    solve.addActionListener(new ActionListener() {
+
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        solveRoute();
+      }
+    });
+    
+    toolbar.add(solve);
+    
+  }
+  
+  protected void solveRoute() {
+    // ROUTING
+    RoutingTask task = new RoutingTask(
+        "http://route.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World", 
+        credentials);
+
+    RoutingTaskParameters parameters = new RoutingTaskParameters();
+    stops.setSpatialReference(map.getSpatialReference());
+    parameters.setStops(stops);
+    parameters.setOutSpatialReference(map.getSpatialReference());
+    task.solveAsync(parameters, new CallbackListener<RoutingResult>() {
+
+      @Override
+      public void onError(Throwable e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(map.getParent(),
+            "An error has occured. "+e.getLocalizedMessage(), "", JOptionPane.WARNING_MESSAGE);
+      }
+
+      @Override
+      public void onCallback(RoutingResult result) {
+        if (result != null ) {
+          Route topRoute = result.getRoutes().get(0);
+          Graphic routeGraphic = new Graphic(topRoute.getRoute().getGeometry(),
+              new SimpleLineSymbol(Color.BLUE, 2.0f));
+          stopGraphics.addGraphic(routeGraphic);
+        }
+      }
+    });
   }
   
   protected void onFind() {
