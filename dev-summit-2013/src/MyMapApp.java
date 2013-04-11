@@ -6,9 +6,13 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
+import com.esri.core.geometry.Envelope;
 import com.esri.map.ArcGISTiledMapServiceLayer;
 import com.esri.map.JMap;
+import com.esri.map.MapEvent;
+import com.esri.map.MapEventListenerAdapter;
 
 public class MyMapApp {
 
@@ -31,6 +35,19 @@ public class MyMapApp {
     });
 
     map = new JMap();
+    
+    map.addMapEventListener(new MapEventListenerAdapter() {
+      @Override
+      public void mapReady(final MapEvent arg0) {
+        SwingUtilities.invokeLater(new Runnable() {
+          @Override
+          public void run() {
+            // default extent to Edinburgh, Scotland
+            map.setExtent(new Envelope(-377278, 7533440, -339747, 7558472.79));
+          }
+        });
+      }
+    });
 
     window.getContentPane().add(map, BorderLayout.CENTER);
 
