@@ -359,9 +359,21 @@ public class DemoTheatreAppImproved {
     jMap.addMouseListener(mouseActionHandler);
 
     // Tip: get code for infopopup from samples
-    // addInfopopupOverlay(jMap, featureLayer);
+    addInfopopupOverlay(jMap, featureLayer);
 
     return jMap;
+  }
+  
+  private void addInfopopupOverlay(JMap jMap, ArcGISFeatureLayer featureLayer) {
+    // create the infopopup overlay
+    infoPopupOverlay = new InfoPopupOverlay();
+    // customize the popup and item titles
+    infoPopupOverlay.setPopupTitle("Feature");
+    // infoPopupOverlay.setItemTitle("Block: {BLOCK}");
+    // add the layer of interest to the overlay
+    infoPopupOverlay.addLayer(featureLayer);
+    // add the overlay to the map
+    jMap.addMapOverlay(infoPopupOverlay);
   }
 
   /**
