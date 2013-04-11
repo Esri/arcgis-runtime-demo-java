@@ -50,6 +50,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
 import com.esri.client.toolkit.overlays.InfoPopupOverlay;
+import com.esri.core.geometry.Envelope;
 import com.esri.core.geometry.Geometry;
 import com.esri.core.geometry.GeometryEngine;
 import com.esri.core.geometry.Point;
@@ -299,11 +300,11 @@ public class DemoTheatreAppImproved {
           @Override
           public void run() {
             try {
-              /*Envelope initialExtent = new Envelope(-122.593, 37.642, -122.256, 37.867); 
+              Envelope initialExtent = new Envelope(-122.593, 37.642, -122.256, 37.867); 
               // Tip: Use appropriate spatial reference 
               SpatialReference inSR = SpatialReference.create(4326); 
               initialExtent = (Envelope) GeometryEngine.project(initialExtent, inSR, jMap.getSpatialReference()); 
-              ((JMap) arg0.getSource()).setExtent(initialExtent);*/
+              ((JMap) arg0.getSource()).setExtent(initialExtent);
             } catch (Exception ex) {
               ex.printStackTrace();
             }
@@ -576,8 +577,8 @@ public class DemoTheatreAppImproved {
     private void handleAddGraphic(MouseEvent mapEvent) {
       Point p = jMap.toMapPoint(mapEvent.getPoint().x, mapEvent.getPoint().y);
       // Tip: use the right symbol for geometry
-      // SimpleMarkerSymbol s = new SimpleMarkerSymbol(Color.RED, 14, Style.CROSS);
-      SimpleLineSymbol s = new SimpleLineSymbol(Color.RED, 10);
+      SimpleMarkerSymbol s = new SimpleMarkerSymbol(Color.RED, 14, Style.CROSS);
+      //SimpleLineSymbol s = new SimpleLineSymbol(Color.RED, 10);
       graphicsLayer.addGraphic(new Graphic(p, s));  
     }
     
