@@ -174,8 +174,10 @@ public class DemoTheatreAppImproved {
       @Override
       public void valueChanged(ListSelectionEvent e) {
         int selectedCityRowId = tblCities.getSelectedRow();
-        Point selectedCity = (Point) tblModelCities.getValueAt(selectedCityRowId, 2);
-        highlightGeometry(selectedCity);
+        if (selectedCityRowId > 0) {
+          Point selectedCity = (Point) tblModelCities.getValueAt(selectedCityRowId, 2);
+          highlightGeometry(selectedCity);
+        }
       }
     });
     // don't show shape column
@@ -183,7 +185,7 @@ public class DemoTheatreAppImproved {
     tblCities.getColumnModel().removeColumn(shapeColumn);
 
     // various actions
-    JLabel queryLabel = new JLabel("Filter cities with population < ");
+    JLabel queryLabel = new JLabel("Filter cities with population > ");
     queryLabel.setForeground(Color.WHITE);
     queryText.setMinimumSize(new Dimension(150, 25));
     queryText.setMaximumSize(new Dimension(150, 25));
@@ -275,12 +277,8 @@ public class DemoTheatreAppImproved {
     // -----------------------------------------------------------------------------------------
     // Zoom to the highlighted graphic
     // -----------------------------------------------------------------------------------------
-    Geometry geometryForZoom = GeometryEngine.buffer(
-      point, 
-      map.getSpatialReference(), 
-      map.getFullExtent().getWidth() * 0.10, 
-      map.getSpatialReference().getUnit());
-    map.zoomTo(geometryForZoom);
+    // from base map's information, zoom to a resolution so that city is in focus
+    map.zoomToResolution(0.02197265625, point);
   }
 
   /**
