@@ -3,6 +3,10 @@ Demos from Dev Summit 2014
 
 Videos of presentations:
 	http://video.esri.com
+	
+## Prerequisite
+
+ArcGIS Runtime SDK for Java 10.2
 
 ## Contributing
 
