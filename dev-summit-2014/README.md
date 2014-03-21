@@ -7,6 +7,7 @@ Videos of presentations:
 ## Prerequisite
 
 ArcGIS Runtime SDK for Java 10.2
+(Source code will be updated to support 10.2.2 when released).
 
 ## Contributing
 
