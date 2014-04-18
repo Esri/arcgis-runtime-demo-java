@@ -4,7 +4,7 @@ Samples for ArcGIS Runtime SDK for Java - a SDK to create rich client mapping ap
 
 ## Instructions
 
-1. Install ArcGIS Runtime SDK for Java available through EDN.
+1. Download and install ArcGIS Runtime SDK for Java from https://developers.arcgis.com/java/.
 2. Fork and then clone the repo. 
 3. Add the source code to your Java IDE.
 4. Add jars from the installation from 1st step.
