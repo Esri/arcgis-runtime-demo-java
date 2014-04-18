@@ -1,8 +1,16 @@
 Demos from Dev Summit 2014
 ===========================
 
-Videos of presentations:
-	http://video.esri.com
+Recorded videos of presentations:
+
+- [Getting Started with ArcGIS Runtime SDK for Java SE]
+(http://video.esri.com/watch/3262/getting-started-with-arcgis-runtime-sdk-for-java-se)
+
+- [Building Java Apps with ArcGIS Runtime SDK]
+(http://video.esri.com/watch/3411/building-java-apps-with-arcgis-runtime-sdk)
+
+- [Animate Thousands of Graphics & Features with Runtime SDK for Java]	
+(http://video.esri.com/watch/3370/animate-thousands-of-graphics-_and_-features-with-runtime-sdk-for-java)
 	
 ## Prerequisite
 
