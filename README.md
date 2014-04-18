@@ -12,7 +12,7 @@ Samples for ArcGIS Runtime SDK for Java - a SDK to create rich client mapping ap
 
 ## Resources
 
-* [ArcGIS Runtime SDK for Java] (http://resources.arcgis.com/en/communities/runtime-java/)
+* [ArcGIS Runtime SDK for Java] (https://developers.arcgis.com/java/)
 
 ## Issues
 
