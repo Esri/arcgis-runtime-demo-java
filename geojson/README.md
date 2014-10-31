@@ -1,4 +1,4 @@
 ## GeoJson sample with ArcGIS Runtime for Java
 
-![Screenshot](/screenshot.png?raw=true "Screenshot")
+![Screenshot](/geojson/screenshot.png?raw=true "Screenshot")
 
