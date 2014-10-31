@@ -18,7 +18,9 @@ Data file countries.geojson is from https://github.com/johan/.
 
 ## GeoJson
 GeoJSON is an open standard for representing geographical features and their attributes. Based on the JSON (JavaScript Object Notation) format, GeoJSON inherits the advantages of being readable, simple and lightweight. Many GIS technologies and services now support GeoJSON.
+
 At its core, it defines a type called Feature. A Feature has a geometry and optional properties. The geometry types supported are Point, LineString, Polygon, MultiPoint, MultiLineString, MultiPolygon. Properties are basically name-value pairs. A set of features is represented by a FeatureCollection.
+
 The following example represents the Los Angeles airport as a GeoJSON Feature. The feature geometry is of type Point with a long-lat value of (-118.40, 33.93). The airport code LAX and its elevation 38 (meters) are specified as properties.
 ```
 { 
@@ -35,18 +37,18 @@ The following example represents the Los Angeles airport as a GeoJSON Feature. T
 ```
 
 ## Mapping GeoJSON Feature to ArcGIS Runtime Feature
-The structure of a Feature in ArcGIS Runtime is very similar to that of a GeoJSON Feature - it consists of a Geometry and an optional map of name-value pairs called attributes. The properties of a GeoJSON feature can be directly mapped to the attributes of a ArcGIS Runtime feature. The mapping between the GeoJSON geometry and ArcGIS Runtime geometry is as per table below.
+The structure of a Feature in ArcGIS Runtime is very similar to that of a GeoJSON Feature - it consists of a Geometry and an optional map of name-value pairs called attributes. The properties of a GeoJSON feature can be directly mapped to the attributes of a ArcGIS Runtime feature. 
 
+The mapping between the GeoJSON geometry and ArcGIS Runtime geometry is as per table below.
 
-|GeoJSON |  ArcGIS Runtime SDK |
-|        |(in Java package com.esri.core.geometry)|
-| ------ | ------------        |
-|Point| Point|
-|MultiPoint  |MultiPoint|
-|LineString  |Polyline|
-|MultiLineString |Polyline|
-|Polygon |Polygon|
-|MultiPolygon  |Polygon|
+GeoJSON         | ArcGIS Runtime SDK (com.esri.core.geometry)
+-------         | ------------------        
+Point           | Point
+MultiPoint      | MultiPoint
+LineString      | Polyline
+MultiLineString | Polyline
+Polygon         | Polygon
+MultiPolygon    | Polygon
   
 Geometry types of GeoJSON and corresponding type in ArcGIS Runtime
 
@@ -72,8 +74,8 @@ for (Feature f : features) {
 }
 ```
 
-References:
-1.  GeoJSON - http://geojson.org/
-2.  ArcGIS Runtime SDK for Java - https://developers.arcgis.com/java/
+## References:
+1. GeoJSON - http://geojson.org/
+2. ArcGIS Runtime SDK for Java - https://developers.arcgis.com/java/
 
 
