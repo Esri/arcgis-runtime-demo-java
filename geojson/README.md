@@ -4,8 +4,8 @@
 
 ## About
 
-This sample [](/geojson/src/GeoJsonApp.java) provides a parser [](/geojson/src/GeoJsonParser.java) that can 
-parse [GeoJson](http://geojson.org/), and convert the GeoJson data [](/geojson/countries.geojson) to 
+This [sample](/geojson/src/GeoJsonApp.java) provides a [parser](/geojson/src/GeoJsonParser.java) that can 
+parse [GeoJson](http://geojson.org/), and convert the [GeoJson data](/geojson/countries.geojson) to 
 ArcGISRuntime Feature and Geometry. After parsing, the features are added to a GraphicsLayer.
 
 ## Instructions to run the sample
