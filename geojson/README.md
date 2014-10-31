@@ -1,4 +1,4 @@
-## GeoJson sample with ArcGIS Runtime for Java
+## GeoJSON sample with ArcGIS Runtime for Java
 
 ![Screenshot](/geojson/screenshot.png?raw=true "Screenshot")
 
@@ -16,7 +16,7 @@ ArcGISRuntime Feature and Geometry. After parsing, the features are added to a G
 ## Credits
 Data file countries.geojson is from https://github.com/johan/.
 
-## GeoJson
+## GeoJSON
 GeoJSON is an open standard for representing geographical features and their attributes. Based on the JSON (JavaScript Object Notation) format, GeoJSON inherits the advantages of being readable, simple and lightweight. Many GIS technologies and services now support GeoJSON.
 
 At its core, it defines a type called Feature. A Feature has a geometry and optional properties. The geometry types supported are Point, LineString, Polygon, MultiPoint, MultiLineString, MultiPolygon. Properties are basically name-value pairs. A set of features is represented by a FeatureCollection.
