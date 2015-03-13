@@ -8,6 +8,10 @@ This [application](/geojson/src/GeoJsonApp.java) uses a [parser](/geojson/src/Ge
 parse [GeoJson](http://geojson.org/), and convert the [GeoJson data](/geojson/countries.geojson) to 
 ArcGISRuntime Feature and Geometry. After parsing, the features are added to a GraphicsLayer.
 
+## Prerequisite
+
+ArcGIS Runtime SDK for Java, 10.2.4
+
 ## Instructions to run the sample
 1. Download & Install [ArcGIS Runtime SDK for Java](https://developers.arcgis.com/java/)
 2. Open the Eclipse project in this folder.
