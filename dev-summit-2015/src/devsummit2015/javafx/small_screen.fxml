@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import com.esri.map.*?>
+
+<StackPane fx:id="root" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" 
+  fx:controller="devsummit2015.javafx.SampleController">
+   <children>
+      <FXMap fx:id="map" width="640" height="640"/>
+      <VBox fx:id="boxMenu" spacing="5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" StackPane.alignment="top_left">
+               <children>
+                  <Text/>
+                  <Button fx:id="btnMenu" mnemonicParsing="false" onAction="#showMenu" prefHeight="64.0" prefWidth="128.0" text="&#8801;" styleClass="button-small"/>
+                  <Button fx:id="btnIdentify" visible="false" mnemonicParsing="false" onAction="#setModeToIdentify" prefHeight="64.0" prefWidth="128.0" text="i" styleClass="button-small"/>
+                  <Button fx:id="btnExit" visible="false" mnemonicParsing="false" onAction="#exit" prefHeight="64.0" prefWidth="128.0" text="x" styleClass="button-small"/>
+               </children>
+       </VBox>
+      <HBox fx:id="boxSymbolContainer" spacing="5" visible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" StackPane.alignment="top_right">
+        <children>
+            <Button mnemonicParsing="false" prefHeight="64.0" prefWidth="128.0" text="+" onAction="#selectRedSymbol" styleClass="button-red-small"/>
+            <Button mnemonicParsing="false" prefHeight="64.0" prefWidth="128.0" text="+" onAction="#selectGreenSymbol" styleClass="button-green-small"/>
+            <Button mnemonicParsing="false" prefHeight="64.0" prefWidth="128.0" text="+" onAction="#selectBlueSymbol" styleClass="button-blue-small"/>
+        </children>
+      </HBox>
+   </children>
+</StackPane>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import com.esri.map.*?>
+
+<VBox fx:id="root" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" 
+  fx:controller="devsummit2015.javafx.SampleController">
+   <children>
+      <Label text="JavaFX Demo" alignment="center" textAlignment="center" minWidth="1144" >
+         <!-- font>
+            <Font size="24.0" />
+         </font-->
+      </Label>
+      <HBox spacing="5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
+         <children>
+            <VBox spacing="5">
+               <children>
+                  <Label mnemonicParsing="false" prefHeight="64.0" prefWidth="150.0" text="ZOOM" alignment="center" />
+                  <Button mnemonicParsing="false" prefHeight="64.0" prefWidth="150.0" text="In" />
+                  <Button mnemonicParsing="false" prefHeight="64.0" prefWidth="150.0" text="Out" />
+                  <Label mnemonicParsing="false" prefHeight="64.0" prefWidth="150.0" text="PAN" alignment="center" />
+                  <Button mnemonicParsing="false" prefHeight="64.0" prefWidth="150.0" text="Left" />
+                  <Button mnemonicParsing="false" prefHeight="64.0" prefWidth="150.0" text="Right" />
+                  <Button mnemonicParsing="false" prefHeight="64.0" prefWidth="150.0" text="Up" />
+                  <Button mnemonicParsing="false" prefHeight="64.0" prefWidth="150.0" text="Down" />
+                  <Label mnemonicParsing="false" prefHeight="64.0" prefWidth="150.0" text="GRAPHIC" alignment="center" />
+                  <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#setModeToAdd" prefHeight="64.0" prefWidth="150.0" text="Add" />
+                  <Button mnemonicParsing="false" onAction="#setModeToIdentify" prefHeight="64.0" prefWidth="150.0" text="Identify" />
+                  <Label mnemonicParsing="false" prefHeight="64.0" prefWidth="150.0" text="" />
+                  <Button fx:id="btnExit" mnemonicParsing="false" onAction="#exit" prefHeight="64.0" prefWidth="150.0" text="Exit" />
+               </children>
+            </VBox>
+            <FXMap fx:id="map" width="1024" height="720"/>
+         </children>
+      </HBox>
+      <HBox fx:id="boxSymbolContainer" visible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
+        <children>
+            <Button mnemonicParsing="false" prefHeight="64.0" prefWidth="150.0" text="" />
+            <Button mnemonicParsing="false" prefHeight="64.0" prefWidth="150.0" text="Red" onAction="#selectRedSymbol" styleClass="button-red"/>
+            <Button mnemonicParsing="false" prefHeight="64.0" prefWidth="150.0" text="Green" onAction="#selectGreenSymbol" styleClass="button-green"/>
+            <Button mnemonicParsing="false" prefHeight="64.0" prefWidth="150.0" text="Blue" onAction="#selectBlueSymbol" styleClass="button-blue"/>
+        </children>
+      </HBox>
+   </children>
+</VBox>
