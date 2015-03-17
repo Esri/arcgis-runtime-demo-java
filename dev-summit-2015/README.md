@@ -3,7 +3,8 @@ Demos from Dev Summit 2015
 	
 ## Prerequisite
 
-Install ArcGIS Runtime SDK for Java 10.2.4
+* Install ArcGIS Runtime SDK for Java 10.2.4
+* JRE 8 for the JavaFX demo
 
 ## Contributing
 
