@@ -15,32 +15,14 @@
             <Insets left="10" top="10">
             </Insets>
         </StackPane.margin>
-        <TextField fx:id="searchBox" onAction="#getGeocode" promptText="Address" editable="true"
+        <TextField fx:id="searchBox" onAction="#getGeocode" promptText="Enter address of fire incident" editable="true"
                    maxWidth="260">
         </TextField>
-        <Button fx:id="truckButton" onAction="#dispatchFireTruck" disable="true">
-            <graphic>
-                <ImageView>
-                    <Image url="/icons/firetruck-icon.png">
-                    </Image>
-                </ImageView>
-            </graphic>
+        <Button fx:id="truckButton" text="Report to Truck" onAction="#dispatchFireTruck" disable="true">
         </Button>
-        <Button fx:id="helicopterButton" onAction="#spawnHelicopter" disable="true">
-            <graphic>
-                <ImageView>
-                    <Image url="/icons/helicopter-icon.png">
-                    </Image>
-                </ImageView>
-            </graphic>
+        <Button fx:id="helicopterButton" text="Send Helicopter from nearby helipad" onAction="#spawnHelicopter" disable="true">
         </Button>
-        <ToggleButton fx:id="flagButton" onAction="#flagFireZone" disable="true">
-            <graphic>
-                <ImageView>
-                    <Image url="/icons/flag-icon.png">
-                    </Image>
-                </ImageView>
-            </graphic>
+        <ToggleButton fx:id="flagButton" text="Draw Fire Zone" onAction="#flagFireZone" disable="true">
         </ToggleButton>
     </VBox>
 </StackPane>

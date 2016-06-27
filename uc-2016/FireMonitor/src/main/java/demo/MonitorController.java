@@ -248,7 +248,7 @@ public class MonitorController {
   @FXML
   private void flagFireZone() {
     // create a red point symbol
-    SimpleMarkerSymbol clickSymbol = new SimpleMarkerSymbol(SimpleMarkerSymbol.Style.CIRCLE, 0xFFFF0000, 2);
+    SimpleMarkerSymbol clickSymbol = new SimpleMarkerSymbol(SimpleMarkerSymbol.Style.CIRCLE, 0xFFFF0000, 10);
     SimpleFillSymbol zoneSymbol = new SimpleFillSymbol(SimpleFillSymbol.Style.FORWARD_DIAGONAL, 0xFFFF0000, new
         SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, 0xFFFF0000, 2));
     zoneBuilder = new PolygonBuilder(polysFeatureTable.getSpatialReference());
