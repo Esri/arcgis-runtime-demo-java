@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.StackPane?>
+<?import com.esri.arcgisruntime.mapping.view.SceneView?>
+<?import javafx.scene.layout.VBox?>
+<StackPane fx:controller="demo.MonitorController" xmlns:fx="http://javafx.com/fxml">
+    <SceneView fx:id="sceneView">
+    </SceneView>
+    <VBox StackPane.alignment="TOP_LEFT" spacing="5" pickOnBounds="false">
+        <StackPane.margin>
+            <Insets left="10" top="10">
+            </Insets>
+        </StackPane.margin>
+        <TextField fx:id="searchBox" onAction="#getGeocode" promptText="Address" editable="true"
+                   maxWidth="260">
+        </TextField>
+        <Button fx:id="truckButton" onAction="#dispatchFireTruck" disable="true">
+            <graphic>
+                <ImageView>
+                    <Image url="/icons/firetruck-icon.png">
+                    </Image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button fx:id="helicopterButton" onAction="#spawnHelicopter" disable="true">
+            <graphic>
+                <ImageView>
+                    <Image url="/icons/helicopter-icon.png">
+                    </Image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <ToggleButton fx:id="flagButton" onAction="#flagFireZone" disable="true">
+            <graphic>
+                <ImageView>
+                    <Image url="/icons/flag-icon.png">
+                    </Image>
+                </ImageView>
+            </graphic>
+        </ToggleButton>
+    </VBox>
+</StackPane>

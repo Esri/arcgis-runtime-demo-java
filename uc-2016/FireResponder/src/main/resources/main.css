@@ -1,0 +1,56 @@
+.hbox {
+    -fx-background-color: black;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-corner-radius: 0px;
+    -fx-min-width: 32px;
+    -fx-min-height: 32px;
+}
+
+.button {
+    -fx-background-color: black;
+    -fx-border-color: white;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-corner-radius: 0px;
+    -fx-min-width: 32px;
+    -fx-min-height: 32px;
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+}
+
+.button:hover {
+    -fx-background-color: salmon;
+    -fx-border-color: black;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-min-width: 32px;
+    -fx-min-height: 32px;
+    -fx-cursor: hand;
+    -fx-scale-x: 1.4;
+    -fx-scale-y: 1.4;
+}
+
+.label {
+    -fx-background-color: black;
+    -fx-border-color: black;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-corner-radius: 0px;
+    -fx-min-width: 32px;
+    -fx-min-height: 32px;
+}
+
+.callout {
+  background-color: black;
+  border-color: salmon;
+  border-width: 2;
+  title-color: white;
+  detail-color: white;
+}
+
+

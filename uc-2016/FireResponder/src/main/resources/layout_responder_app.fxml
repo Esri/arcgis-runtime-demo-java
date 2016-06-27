@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import com.esri.arcgisruntime.mapping.view.*?>
+<?import javafx.scene.control.ProgressBar?>
+
+<VBox fx:controller="ResponderAppController" prefWidth="800" prefHeight="800" xmlns="http://javafx.com/javafx/8"
+  xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+  
+    <HBox spacing="40" alignment="center" styleClass="hbox">
+      <children>
+        <Button fx:id="btnDownload" prefHeight="64.0" prefWidth="150.0" text="Download" onAction="#onDownloadClicked" />
+        <Button fx:id="btnOffline" prefHeight="64.0" prefWidth="150.0" text="Offline" onAction="#onOfflineClicked" />
+        <Button fx:id="btnGeometry" prefHeight="64.0" prefWidth="150.0" text="Geometry" onAction="#onGeometryClicked" />
+        <Button fx:id="btnRoute" prefHeight="64.0" prefWidth="150.0" text="Route" onAction="#onRouteClicked" />
+        <Button fx:id="btnEdit" prefHeight="64.0" prefWidth="150.0" text="Edit" onAction="#onEditClicked" />
+        <Button fx:id="btnSync" prefHeight="64.0" prefWidth="150.0" text="Sync" onAction="#onSyncClicked" />
+        <Button fx:id="btnExit" prefHeight="64.0" prefWidth="150.0" text="Exit" onAction="#onExitClicked" />
+      </children>
+    </HBox>
+    
+    <ProgressBar fx:id="progressBar" prefHeight="32.0" prefWidth="800" visible="false" />
+    
+    <MapView fx:id="mapView" prefWidth="800" prefHeight="1024" />
+    
+  </children>
+</VBox>
