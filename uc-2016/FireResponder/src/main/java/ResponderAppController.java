@@ -99,40 +99,39 @@ public class ResponderAppController {
 
   // online feature layer to fetch data from
   private final String SERVICE_URL = "http://sampleserver6.arcgisonline.com/arcgis/rest/services/Sync/WildfireSync/FeatureServer";
-  private final String LAYER_URL   = SERVICE_URL + "/0";
+  private final String LAYER_URL = SERVICE_URL + "/0";
   private FeatureLayer featureLayer;
 
   // offline tiles
   private static String tilePackageFilePath;
 
   // offline, edit and sync
-  private GeodatabaseSyncTask     geodatabaseSyncTask;
+  private GeodatabaseSyncTask geodatabaseSyncTask;
   private GeodatabaseFeatureTable offlineFeatureTable;
-  private Geodatabase             geodatabase;
-  private FeatureLayer            offlineFeatureLayer;
-  private static String           geodatabaseFilePath;
+  private Geodatabase geodatabase;
+  private FeatureLayer offlineFeatureLayer;
+  private static String geodatabaseFilePath;
 
   // geometry
   private Symbol geometrySymbol = new SimpleFillSymbol(SimpleFillSymbol.Style.SOLID, 0xaa0ff0aa, null);
-  private Point  geometryCenter;
+  private Point geometryCenter;
 
   // route
-  private static String   routeFilePath;
+  private static String routeFilePath;
   private RouteParameters routeParameters;
-  private Stop            routeFrom;
-  private Stop            routeTo;
-  private Symbol          routeSymbol = new SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, 0xff00ffff, 4);
+  private Stop routeFrom;
+  private Stop routeTo;
+  private Symbol routeSymbol = new SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, 0xff00ffff, 4);
 
   static {
     try {
-      geodatabaseFilePath = "/home/linux/git/devtopia/vija6672/demos/UC2016/FireResponder/src/main/resources/data/offline/offline.geodatabase";
-      // Paths.get(ResponderAppController.class.getResource("/data/offline/offline.geodatabase").toURI()).toString();
+      geodatabaseFilePath = System.getProperty("java.io.tmpdir") + "ResponderAppController" + ".geodatabase";
       File file = new File(geodatabaseFilePath);
       if (file.exists()) {
         file.delete();
       }
       tilePackageFilePath = Paths.get(ResponderAppController.class.getResource("/data/tiled packages/RedlandsBasemap.tpk").toURI()).toString();
-      routeFilePath = Paths.get(ResponderAppController.class.getResource("/data/network_analyst/Redlands/northamerica.geodatabase").toURI()).toString();
+      routeFilePath = Paths.get(ResponderAppController.class.getResource("/data/network analyst/northamerica.geodatabase").toURI()).toString();
     } catch (URISyntaxException e) {
       System.out.println("Error in initialization.");
     }
@@ -374,19 +373,21 @@ public class ResponderAppController {
       featureLayer.clearSelection();
 
       // identify the clicked features
-      try {
-        // create a point from where the user clicked
-        Point2D pointOnScreen = new Point2D(mapClickEvent.getX(), mapClickEvent.getY());
 
-        IdentifyLayerResult identifyResult = mapView.identifyLayerAsync(offlineFeatureLayer, pointOnScreen, 10, 1).get();
-        Feature hitFeature = (Feature) identifyResult.getIdentifiedElements().get(0);
+      // create a point from where the user clicked
+      Point2D pointOnScreen = new Point2D(mapClickEvent.getX(), mapClickEvent.getY());
 
-        // select and display
-        featureLayer.selectFeature(hitFeature);
-        displayFeature(hitFeature, pointOnScreen);
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
+      ListenableFuture<IdentifyLayerResult> identifyResultFuture = mapView.identifyLayerAsync(offlineFeatureLayer, pointOnScreen, 10, 1);
+      identifyResultFuture.addDoneListener(() -> {
+        try {
+          IdentifyLayerResult identifyResult = identifyResultFuture.get();
+          Feature hitFeature = (Feature) identifyResult.getIdentifiedElements().get(0);
+          featureLayer.selectFeature(hitFeature);
+          displayFeature(hitFeature, pointOnScreen);
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+      });
 
       return null;
     });
