@@ -163,6 +163,13 @@ public class App extends Application {
         Application.launch(args);
     }
 
+    /**
+     * Converts a geojson string to com.esri.core.geometry.Point.
+     *
+     * @param jsonPoint geoJson string representation of a Point
+     * @return com.esri.core.geometry.Point
+     * @throws Exception
+     */
     static com.esri.core.geometry.Point createPointFromGeoJson(String jsonPoint) throws Exception {
 
         MapGeometry mapGeom = OperatorImportFromGeoJson.local().execute(GeoJsonImportFlags.geoJsonImportDefaults,
@@ -171,11 +178,6 @@ public class App extends Application {
                 null);
 
         return (com.esri.core.geometry.Point) mapGeom.getGeometry();
-    }
-
-    private com.esri.core.geometry.Point createPoint(){
-        com.esri.core.geometry.Point point = new com.esri.core.geometry.Point(47.608629, -122.336769);
-        return point;
     }
 
     /**
