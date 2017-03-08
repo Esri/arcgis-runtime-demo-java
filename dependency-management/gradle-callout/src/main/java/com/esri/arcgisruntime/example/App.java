@@ -22,8 +22,12 @@ import com.esri.arcgisruntime.geometry.SpatialReferences;
 import com.esri.arcgisruntime.mapping.ArcGISMap;
 import com.esri.arcgisruntime.mapping.Basemap;
 import com.esri.arcgisruntime.mapping.view.Callout;
+import com.esri.arcgisruntime.mapping.view.Graphic;
+import com.esri.arcgisruntime.mapping.view.GraphicsOverlay;
 import com.esri.arcgisruntime.mapping.view.MapView;
 
+import com.esri.arcgisruntime.symbology.SimpleMarkerSymbol;
+import com.esri.core.geometry.*;
 import javafx.application.Application;
 import javafx.geometry.Point2D;
 import javafx.scene.Scene;
@@ -31,6 +35,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
 
 public class App extends Application {
 
@@ -59,6 +64,49 @@ public class App extends Application {
             // create a view and set map to it
             mapView = new MapView();
             mapView.setMap(map);
+
+            // create 6 station points from geojson string
+            String station1 = "{\"type\":\"Point\",\"coordinates\":[-122.32799470424652,47.59850568873259],\"crs\":\"EPSG:4326\"}";
+            com.esri.core.geometry.Point station1Pnt = createPointFromGeoJson(station1);
+            String station2 = "{\"type\":\"Point\",\"coordinates\":[-122.33112752437592,47.602473763740484],\"crs\":\"EPSG:4326\"}";
+            com.esri.core.geometry.Point station2Pnt = createPointFromGeoJson(station2);
+            String station3 = "{\"type\":\"Point\",\"coordinates\":[-122.33570337295531,47.60749401439728],\"crs\":\"EPSG:4326\"}";
+            com.esri.core.geometry.Point station3Pnt = createPointFromGeoJson(station3);
+            String station4 = "{\"type\":\"Point\",\"coordinates\":[-122.33618617057799,47.61182666756116],\"crs\":\"EPSG:4326\"}";
+            com.esri.core.geometry.Point station4Pnt = createPointFromGeoJson(station4);
+            String station5 = "{\"type\":\"Point\",\"coordinates\":[-122.32020020484924,47.61901562056099],\"crs\":\"EPSG:4326\"}";
+            com.esri.core.geometry.Point station5Pnt = createPointFromGeoJson(station5);
+            String station6 = "{\"type\":\"Point\",\"coordinates\":[-122.30383872985841,47.64981422491055],\"crs\":\"EPSG:4326\"}";
+            com.esri.core.geometry.Point station6Pnt = createPointFromGeoJson(station6);
+
+            // create color and symbols for drawing graphics
+            SimpleMarkerSymbol markerSymbol = new SimpleMarkerSymbol(SimpleMarkerSymbol.Style.DIAMOND, 0xffff0000, 14);
+
+            // create a graphics overlay to display stations
+            GraphicsOverlay overlay = new GraphicsOverlay();
+            // create station graphics
+            Graphic station1Graphic = new Graphic(station1Pnt.getY(), station1Pnt.getX());
+            Graphic station2Graphic = new Graphic(station2Pnt.getY(), station2Pnt.getX());
+            Graphic station3Graphic = new Graphic(station3Pnt.getY(), station3Pnt.getX());
+            Graphic station4Graphic = new Graphic(station4Pnt.getY(), station4Pnt.getX());
+            Graphic station5Graphic = new Graphic(station5Pnt.getY(), station5Pnt.getX());
+            Graphic station6Graphic = new Graphic(station6Pnt.getY(), station6Pnt.getX());
+            // set the maker symbols
+            station1Graphic.setSymbol(markerSymbol);
+            station2Graphic.setSymbol(markerSymbol);
+            station3Graphic.setSymbol(markerSymbol);
+            station4Graphic.setSymbol(markerSymbol);
+            station5Graphic.setSymbol(markerSymbol);
+            station6Graphic.setSymbol(markerSymbol);
+            // add the graphics to the overlay
+            mapView.getGraphicsOverlays().add(overlay);
+            overlay.getGraphics().add(station1Graphic);
+            overlay.getGraphics().add(station2Graphic);
+            overlay.getGraphics().add(station3Graphic);
+            overlay.getGraphics().add(station4Graphic);
+            overlay.getGraphics().add(station5Graphic);
+            overlay.getGraphics().add(station6Graphic);
+
             // click event to display the callout
             mapView.setOnMouseClicked(e -> {
                 // check that the primary mouse button was clicked and user is not panning
@@ -113,6 +161,21 @@ public class App extends Application {
     public static void main(String[] args) {
 
         Application.launch(args);
+    }
+
+    static com.esri.core.geometry.Point createPointFromGeoJson(String jsonPoint) throws Exception {
+
+        MapGeometry mapGeom = OperatorImportFromGeoJson.local().execute(GeoJsonImportFlags.geoJsonImportDefaults,
+                Geometry.Type.Point,
+                jsonPoint,
+                null);
+
+        return (com.esri.core.geometry.Point) mapGeom.getGeometry();
+    }
+
+    private com.esri.core.geometry.Point createPoint(){
+        com.esri.core.geometry.Point point = new com.esri.core.geometry.Point(47.608629, -122.336769);
+        return point;
     }
 
     /**
