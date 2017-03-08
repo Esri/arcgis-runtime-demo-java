@@ -163,6 +163,13 @@ public class App extends Application {
         Application.launch(args);
     }
 
+    /**
+     * Converts a geojson string to com.esri.core.geometry.Point.
+     *
+     * @param jsonPoint geoJson string representation of a Point
+     * @return com.esri.core.geometry.Point
+     * @throws Exception
+     */
     static com.esri.core.geometry.Point createPointFromGeoJson(String jsonPoint) throws Exception {
 
         MapGeometry mapGeom = OperatorImportFromGeoJson.local().execute(GeoJsonImportFlags.geoJsonImportDefaults,
