@@ -14,6 +14,7 @@ arcgis.version = '100.0.0'
 
 dependencies {
     compile 'org.controlsfx:controlsfx:8.40.11'
+    compile 'com.esri.geometry:esri-geometry-api:1.2.1'
 }
 
 run {
