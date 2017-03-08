@@ -180,11 +180,6 @@ public class App extends Application {
         return (com.esri.core.geometry.Point) mapGeom.getGeometry();
     }
 
-    private com.esri.core.geometry.Point createPoint(){
-        com.esri.core.geometry.Point point = new com.esri.core.geometry.Point(47.608629, -122.336769);
-        return point;
-    }
-
     /**
      * Converts a degree formatted location coordinate into
      * degrees minutes seconds for display
